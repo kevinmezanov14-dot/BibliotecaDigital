@@ -1,0 +1,23 @@
+/build/
+# Librerías manuales
+src/main/webapp/WEB-INF/lib/
+# Eclipse
+.classpath
+.project
+.settings/
+.metadata/
+
+# Compilados
+*.class
+target/
+bin/
+
+# Logs
+*.log
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Configuración sensible
+db.properties
