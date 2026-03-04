@@ -17,33 +17,13 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
 	rel="stylesheet">
 
-<!-- CSS -->
-<link rel="stylesheet" href="css/navbar.css">
-<link rel="stylesheet" href="css/dashboard.css">
 </head>
 
 <body>
 
 	<!-- NAVBAR -->
-	<nav class="navbar navbar-expand-lg navbar-dark"
-		style="background: linear-gradient(135deg, #667eea, #764ba2);">
-		<div class="container-fluid">
 
-			<span class="navbar-brand d-flex align-items-center gap-2"> <i
-				class="bi bi-book"></i> Biblioteca Digital
-			</span>
-
-			<div class="d-flex align-items-center gap-3">
-				<span class="text-white fw-semibold">
-					${sessionScope.usuario.nick} </span> <a
-					href="${pageContext.request.contextPath}/logout"
-					class="btn btn-outline-light btn-sm"> <i
-					class="bi bi-box-arrow-right"></i> Cerrar Sesión
-				</a>
-			</div>
-
-		</div>
-	</nav>
+	<jsp:include page="/WEB-INF/jsp/include/navbar.jsp"></jsp:include>
 
 	<!-- CONTENIDO -->
 	<div class="container my-5">

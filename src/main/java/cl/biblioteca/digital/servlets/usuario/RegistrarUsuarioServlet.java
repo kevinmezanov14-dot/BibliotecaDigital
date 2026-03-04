@@ -72,7 +72,7 @@ public class RegistrarUsuarioServlet extends HttpServlet {
 			usuario.setEmail(email);
 			usuario.setPassword(password);
 			usuario.setFechaNacimiento(Date.valueOf(fechaNacimiento));
-			usuario.setActivo(true); // 👈 IMPORTANTE (tu BD lo espera)
+			usuario.setActivo(true); 
 
 			// Guardar en BD
 			dao.insertar(usuario);
@@ -82,7 +82,7 @@ public class RegistrarUsuarioServlet extends HttpServlet {
 
 		} catch (Exception e) {
 
-			e.printStackTrace(); // ver error real en consola
+			e.printStackTrace(); // ver error en consola
 
 			request.setAttribute("error", "Error interno al registrar usuario");
 			request.getRequestDispatcher("/login/registro.jsp").forward(request, response);

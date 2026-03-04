@@ -6,6 +6,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lista de Libros - Biblioteca Digital</title>
+<!-- Bootstrap CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<!-- Bootstrap Icons -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+	rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/style.css">
 <style>
 /* ... tus estilos ... */
 
@@ -28,8 +38,13 @@
 	border: 1px solid #f5c6cb;
 }
 </style>
+
 </head>
 <body>
+	<!-- NAVBAR -->
+
+	<jsp:include page="/WEB-INF/jsp/include/navbar.jsp"></jsp:include>
+
 	<div class="container">
 		<h1>📚 Libros en Biblioteca Digital</h1>
 
@@ -130,5 +145,7 @@
 			<p>📭 No hay libros registrados.</p>
 		</c:if>
 	</div>
+		<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
