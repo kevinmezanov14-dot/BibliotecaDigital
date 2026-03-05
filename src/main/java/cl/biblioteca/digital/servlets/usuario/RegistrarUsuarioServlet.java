@@ -72,7 +72,7 @@ public class RegistrarUsuarioServlet extends HttpServlet {
 			usuario.setEmail(email);
 			usuario.setPassword(password);
 			usuario.setFechaNacimiento(Date.valueOf(fechaNacimiento));
-			usuario.setActivo(true); 
+			usuario.setActivo(true);
 
 			// Guardar en BD
 			dao.insertar(usuario);

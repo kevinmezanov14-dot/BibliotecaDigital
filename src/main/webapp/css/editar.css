@@ -1,0 +1,40 @@
+body {
+	background-color: #f8f9fa;
+}
+
+.card-editar {
+	border: none;
+	border-radius: 12px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.card-header-editar {
+	background: linear-gradient(135deg, #1a237e, #283593);
+	color: white;
+	border-radius: 12px 12px 0 0 !important;
+	padding: 1.5rem;
+}
+
+.form-control:focus, .form-select:focus {
+	border-color: #3949ab;
+	box-shadow: 0 0 0 0.2rem rgba(57, 73, 171, 0.25);
+}
+
+.btn-actualizar {
+	background: linear-gradient(135deg, #1a237e, #3949ab);
+	border: none;
+	padding: 0.6rem 1.8rem;
+	font-weight: 600;
+	letter-spacing: 0.3px;
+	transition: opacity 0.2s;
+}
+
+.btn-actualizar:hover {
+	opacity: 0.88;
+}
+
+.badge-requerido {
+	font-size: 0.65rem;
+	vertical-align: super;
+	color: #e53935;
+}

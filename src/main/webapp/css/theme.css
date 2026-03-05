@@ -1,0 +1,25 @@
+:root {
+    /* Paleta principal */
+    --primary: #1C2433;
+    --primary-soft: #273046;
+    --secondary: #3F5247;
+    --gold: #B89B5E;
+    --gold-soft: #D8C49A;
+
+    /* Neutros */
+    --bg: #F4F6F8;
+    --surface: #FFFFFF;
+    --border: #E6E8EC;
+    --text: #2A2E34;
+    --muted: #7A828C;
+
+    /* Bootstrap overrides */
+    --bs-link-color: var(--secondary);
+    --bs-link-hover-color: var(--gold);
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+}

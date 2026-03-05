@@ -1,97 +1,64 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
+<%@ page contentType="text/html;charset=UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Dashboard - Biblioteca Digital</title>
+<title>Dashboard — Biblioteca Digital</title>
 
-<!-- Bootstrap CSS -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
 
-<!-- Bootstrap Icons -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
-	rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/theme.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/navbar.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/dashboard.css">
 
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
-
 <body>
 
-	<!-- NAVBAR -->
+<jsp:include page="/WEB-INF/jsp/include/navbar.jsp"/>
 
-	<jsp:include page="/WEB-INF/jsp/include/navbar.jsp"></jsp:include>
+<section class="hero">
+    <div class="container">
+        <h1>Bienvenido, <span>${sessionScope.usuario.nick}</span></h1>
+        <p>Tu espacio personal en la Biblioteca Digital</p>
+    </div>
+</section>
 
-	<!-- CONTENIDO -->
-	<div class="container my-5">
+<div class="container my-5">
 
-		<div class="card p-4 mb-4 shadow-sm">
-			<h1>Bienvenido, ${sessionScope.usuario.nick}</h1>
-			<p class="text-muted">Este es tu dashboard personal.</p>
-			<small>Edad registrada: ${sessionScope.edad} años</small>
-		</div>
+    <div class="row g-4">
 
-		<div class="row g-4">
+        <div class="col-md-4">
+            <div class="card custom-card">
+                <div class="card-body">
+                    <i class="bi bi-book stat-icon"></i>
+                    <h5>Gestión de Libros</h5>
+                    <p>Administra tu colección digital.</p>
+                    <a href="${pageContext.request.contextPath}/libros" class="btn btn-elegant">
+                        Ir a Libros
+                    </a>
+                </div>
+            </div>
+        </div>
 
-			<!-- LIBROS -->
-			<div class="col-md-6 col-lg-4">
-				<div class="card p-4 h-100 text-center shadow-sm">
+			<div class="col-md-4">
+				<div class="card custom-card">
+					<div class="card-body">
+						<i class="bi bi-arrow-left-right stat-icon"></i>
+						<h5>Préstamos</h5>
+						<p>Gestiona los préstamos de libros.</p>
 
-					<i class="bi bi-book fs-1 mb-3"></i>
-
-					<h5>Colección de Libros</h5>
-
-					<p class="text-muted">Explora y administra todos los libros
-						disponibles</p>
-
-					<a href="${pageContext.request.contextPath}/libros"
-						class="btn btn-primary mt-3"> Ir a Libros </a>
-
-				</div>
-			</div>
-
-			<!-- CONFIGURACIÓN -->
-			<div class="col-md-6 col-lg-4">
-				<div class="card p-4 h-100 text-center shadow-sm">
-
-					<i class="bi bi-gear fs-1 mb-3"></i>
-
-					<h5>Configuración</h5>
-
-					<p class="text-muted">Ajusta tus preferencias (próximamente)</p>
-
-					<button class="btn btn-secondary mt-3" disabled>En
-						desarrollo</button>
-
-				</div>
-			</div>
-
-			<!-- ESTADÍSTICAS -->
-			<div class="col-md-6 col-lg-4">
-				<div class="card p-4 h-100 text-center shadow-sm">
-
-					<i class="bi bi-bar-chart fs-1 mb-3"></i>
-
-					<h5>Estadísticas</h5>
-
-					<p class="text-muted">Revisa tus datos (próximamente)</p>
-
-					<button class="btn btn-secondary mt-3" disabled>En
-						desarrollo</button>
-
+						<a href="${pageContext.request.contextPath}/prestamos"
+							class="btn btn-elegant"> Ir a Préstamos </a>
+					</div>
 				</div>
 			</div>
 
 		</div>
 
-	</div>
+</div>
 
-	<!-- Bootstrap JS -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
