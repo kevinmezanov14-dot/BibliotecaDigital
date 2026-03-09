@@ -5,5 +5,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface AutorDAO {
-	List<AutorDTO> listar() throws SQLException;
+    List<AutorDTO> listar() throws SQLException;
+    void insertar(AutorDTO autor) throws SQLException;
 }

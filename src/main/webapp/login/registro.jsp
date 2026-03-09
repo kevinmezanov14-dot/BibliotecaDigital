@@ -1,51 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro - Biblioteca Digital</title>
-    <!-- CSS específico para registro -->
-    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/registro.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registro - Biblioteca Digital</title>
+<link
+	href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=DM+Sans:wght@400;500;600&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/theme.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/registro.css">
 </head>
 <body>
-    <div class="register-container">
-        <h1>Biblioteca Digital</h1>
-        <h2>Registro de Usuario</h2>
+	<div class="register-container">
+		<h1>Biblioteca Digital</h1>
+		<h2>Registro de Usuario</h2>
 
-        <c:if test="${not empty error}">
-            <div class="error-message">${error}</div>
-        </c:if>
+		<c:if test="${not empty error}">
+			<div class="error-message">
+				<c:out value="${error}" />
+			</div>
+		</c:if>
 
-        <form method="post" action="<%= request.getContextPath() %>/registrar">
-            <div class="form-group">
-                <label for="nick">Nick</label>
-                <input type="text" name="nick" id="nick" required>
-            </div>
+		<form method="post"
+			action="${pageContext.request.contextPath}/registrar">
 
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" required>
-            </div>
+			<div class="form-group">
+				<label for="nick">Nick</label> <input type="text" name="nick"
+					id="nick" required autocomplete="username">
+			</div>
 
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" required>
-            </div>
+			<div class="form-group">
+				<label for="email">Email</label> <input type="email" name="email"
+					id="email" required autocomplete="email">
+			</div>
 
-            <div class="form-group">
-                <label for="fechaNacimiento">Fecha Nacimiento</label>
-                <input type="date" name="fechaNacimiento" id="fechaNacimiento" required>
-            </div>
+			<div class="form-group">
+				<label for="password">Password</label> <input type="password"
+					name="password" id="password" required autocomplete="new-password">
+			</div>
 
-            <button type="submit">Registrarse</button>
-        </form>
+			<div class="form-group">
+				<label for="fechaNacimiento">Fecha de Nacimiento</label> <input
+					type="date" name="fechaNacimiento" id="fechaNacimiento" required>
+			</div>
 
-        <div class="login-link">
-            ¿Ya tienes cuenta? <a href="<%= request.getContextPath() %>/login">Inicia sesión</a>
-        </div>
-    </div>
+			<button type="submit">Registrarse</button>
+		</form>
+
+		<div class="login-link">
+			¿Ya tienes cuenta? <a href="${pageContext.request.contextPath}/login">Inicia
+				sesión</a>
+		</div>
+	</div>
 </body>
 </html>

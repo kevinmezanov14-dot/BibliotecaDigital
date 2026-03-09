@@ -1,40 +1,110 @@
 body {
-	background-color: #f8f9fa;
+    font-family: 'DM Sans', 'Segoe UI', sans-serif;
+    background-color: #F4F6F8;
+    color: #2A2E34;
 }
 
 .card-editar {
-	border: none;
-	border-radius: 12px;
-	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #E6E8EC !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 20px rgba(28,36,51,0.08) !important;
+    overflow: hidden;
 }
 
 .card-header-editar {
-	background: linear-gradient(135deg, #1a237e, #283593);
-	color: white;
-	border-radius: 12px 12px 0 0 !important;
-	padding: 1.5rem;
+    background: linear-gradient(135deg, #1C2433, #273046) !important;
+    color: white !important;
+    border-radius: 0 !important;
+    padding: 1.5rem !important;
+    border-bottom: 3px solid #B89B5E !important;
 }
 
-.form-control:focus, .form-select:focus {
-	border-color: #3949ab;
-	box-shadow: 0 0 0 0.2rem rgba(57, 73, 171, 0.25);
+.card-header-editar i {
+    color: #B89B5E;
 }
 
+/* Inputs */
+.form-control:focus,
+.form-select:focus {
+    border-color: #B89B5E !important;
+    box-shadow: 0 0 0 3px rgba(184,155,94,0.12) !important;
+}
+
+.form-control,
+.form-select {
+    border: 1.5px solid #E6E8EC;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    background: #F4F6F8;
+    color: #2A2E34;
+    transition: all 0.25s ease;
+}
+
+.form-control:hover,
+.form-select:hover {
+    border-color: #B89B5E;
+}
+
+/* Botón guardar */
 .btn-actualizar {
-	background: linear-gradient(135deg, #1a237e, #3949ab);
-	border: none;
-	padding: 0.6rem 1.8rem;
-	font-weight: 600;
-	letter-spacing: 0.3px;
-	transition: opacity 0.2s;
+    background: #3F5247 !important;
+    border: none !important;
+    padding: 10px 24px !important;
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    font-family: 'DM Sans', sans-serif !important;
+    letter-spacing: 0.02em;
+    transition: all 0.25s ease !important;
 }
 
 .btn-actualizar:hover {
-	opacity: 0.88;
+    background: #B89B5E !important;
+    color: #1C2433 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(184,155,94,0.3) !important;
 }
 
+/* Botón volver */
+.btn-outline-secondary {
+    border-color: #E6E8EC !important;
+    color: #7A828C !important;
+    border-radius: 8px !important;
+    font-family: 'DM Sans', sans-serif !important;
+    transition: all 0.25s ease !important;
+}
+
+.btn-outline-secondary:hover {
+    background: #F4F6F8 !important;
+    border-color: #1C2433 !important;
+    color: #1C2433 !important;
+}
+
+/* Badge requerido */
 .badge-requerido {
-	font-size: 0.65rem;
-	vertical-align: super;
-	color: #e53935;
+    font-size: 0.65rem;
+    vertical-align: super;
+    color: #c0392b;
+}
+
+/* Labels */
+.form-label {
+    color: #2A2E34 !important;
+    font-size: 13px !important;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+/* Alertas */
+.alert-success {
+    background: #f0f9f4 !important;
+    color: #27ae60 !important;
+    border-color: #27ae60 !important;
+    border-left: 3px solid #27ae60 !important;
+}
+
+.alert-danger {
+    background: #fff5f5 !important;
+    color: #c0392b !important;
+    border-color: #c0392b !important;
+    border-left: 3px solid #c0392b !important;
 }

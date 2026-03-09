@@ -14,12 +14,13 @@ public class LibroAutorDTO {
 	}
 
 	// 🔹 Constructor completo (útil para consultas JOIN)
-	public LibroAutorDTO(int idLibro, String isbn, String titulo, int idAutor, String nombreAutor) {
-		this.idLibro = idLibro;
-		this.isbn = isbn;
-		this.titulo = titulo;
-		this.idAutor = idAutor;
-		this.nombreAutor = nombreAutor;
+	public LibroAutorDTO(int idLibro, String isbn, String titulo, int idAutor, String nombreAutor, int stock) {
+	    this.idLibro = idLibro;
+	    this.isbn = isbn;
+	    this.titulo = titulo;
+	    this.idAutor = idAutor;
+	    this.nombreAutor = nombreAutor;
+	    this.stock = stock;
 	}
 
 	// Getters y Setters

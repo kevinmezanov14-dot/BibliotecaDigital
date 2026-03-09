@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,18 +8,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Editar Libro — Biblioteca Digital</title>
 
-<!-- Bootstrap CSS -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
 	rel="stylesheet">
-<!-- Bootstrap Icons -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
 	rel="stylesheet">
-	<link rel="stylesheet"
-      href="${pageContext.request.contextPath}/css/editar.css">
-      <link rel="stylesheet"
-      href="${pageContext.request.contextPath}/css/navbar.css">
+<link
+	href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=DM+Sans:wght@400;500;600&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/theme.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/editar.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/navbar.css">
 </head>
 <body>
 
@@ -30,10 +32,8 @@
 		<div class="row justify-content-center">
 			<div class="col-lg-7">
 
-				<!-- Card principal -->
 				<div class="card card-editar">
 
-					<!-- Header -->
 					<div class="card-header-editar d-flex align-items-center gap-3">
 						<i class="bi bi-pencil-square fs-3"></i>
 						<div>
@@ -45,7 +45,6 @@
 
 					<div class="card-body p-4">
 
-						<!-- Alerta de éxito al volver (por si acaso) -->
 						<c:if test="${param.actualizado == 'success'}">
 							<div class="alert alert-success d-flex align-items-center gap-2"
 								role="alert">
@@ -54,17 +53,16 @@
 							</div>
 						</c:if>
 
-						<!-- Alerta de error del servidor -->
 						<c:if test="${not empty error}">
 							<div class="alert alert-danger d-flex align-items-center gap-2"
 								role="alert">
-								<i class="bi bi-exclamation-triangle-fill"></i> <span>${error}</span>
+								<i class="bi bi-exclamation-triangle-fill"></i> <span><c:out
+										value="${error}" /></span>
 							</div>
 						</c:if>
 
-						<!-- FORMULARIO -->
 						<form method="post"
-							action="<%= request.getContextPath() %>/actualizar/libros"
+							action="${pageContext.request.contextPath}/actualizar/libros"
 							id="formEditar" novalidate>
 
 							<input type="hidden" name="id" value="${libro.id}">
@@ -95,7 +93,7 @@
 									y guiones (10–17 caracteres).</div>
 							</div>
 
-							<!-- Año y Stock en la misma fila -->
+							<!-- Año y Stock -->
 							<div class="row g-3 mb-3">
 								<div class="col-md-6">
 									<label class="form-label fw-semibold"> Año de
@@ -106,7 +104,6 @@
 									<div class="invalid-feedback">Ingresa un año válido
 										(entre 1000 y 2025).</div>
 								</div>
-
 								<div class="col-md-6">
 									<label class="form-label fw-semibold"> Stock <span
 										class="badge-requerido">*</span>
@@ -127,11 +124,11 @@
 									<c:forEach var="autor" items="${autores}">
 										<option value="${autor.id}"
 											<c:if test="${autor.id == libro.autorId}">selected</c:if>>
-											${autor.nombre}</option>
+											<c:out value="${autor.nombre}" />
+										</option>
 									</c:forEach>
 								</select>
-								<div class="invalid-feedback">Debes seleccionar un autor.
-								</div>
+								<div class="invalid-feedback">Debes seleccionar un autor.</div>
 							</div>
 
 							<!-- Botones -->
@@ -140,7 +137,7 @@
 									class="btn btn-primary btn-actualizar text-white">
 									<i class="bi bi-save me-1"></i> Guardar cambios
 								</button>
-								<a href="<%= request.getContextPath() %>/libros"
+								<a href="${pageContext.request.contextPath}/libros"
 									class="btn btn-outline-secondary"> <i
 									class="bi bi-arrow-left me-1"></i> Volver a la lista
 								</a>
@@ -153,43 +150,12 @@
 						</form>
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</div>
 
-	<!-- Bootstrap JS -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-	<!-- Validación cliente con Bootstrap -->
-	<script>
-    (function () {
-        'use strict';
-
-        const form = document.getElementById('formEditar');
-
-        form.addEventListener('submit', function (e) {
-            // Validación nativa del navegador
-            if (!form.checkValidity()) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
-            form.classList.add('was-validated');
-        });
-
-        // Limpiar estado 'was-validated' al corregir un campo
-        form.querySelectorAll('input, select').forEach(function (field) {
-            field.addEventListener('input', function () {
-                if (field.checkValidity()) {
-                    field.classList.remove('is-invalid');
-                    field.classList.add('is-valid');
-                }
-            });
-        });
-
-    })();
-</script>
 
 </body>
 </html>

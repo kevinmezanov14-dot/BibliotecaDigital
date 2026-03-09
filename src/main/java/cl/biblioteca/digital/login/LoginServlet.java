@@ -13,7 +13,7 @@ import cl.biblioteca.digital.model.Usuario;
 import cl.biblioteca.digital.servicios.UsuarioServicio;
 
 @WebServlet("/login")
-public class LoginServlets extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UsuarioServicio usuarioServicio = new UsuarioServicio();
 

@@ -1,33 +1,51 @@
-/* Reset y base */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
-    background-color: #f4f6f8;
-    color: #333;
+    font-family: 'DM Sans', 'Segoe UI', sans-serif;
+    background-color: #F4F6F8;
+    color: #2A2E34;
 }
 
-/* Contenedor principal */
 .container {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 40px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 32px;
+    background: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(28,36,51,0.08);
+    border: 1px solid #E6E8EC;
 }
 
-/* Títulos */
 h1, h2 {
-    color: #667eea;
-    margin-bottom: 20px;
+    font-family: 'Playfair Display', Georgia, serif;
+    color: #1C2433;
+    margin-bottom: 24px;
+    font-size: 28px;
+    font-weight: 600;
 }
 
-/* Tabla de listar */
+/* Botón agregar */
+.container > div[style*="margin-bottom"] a,
+.container > div a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #3F5247;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.25s ease;
+}
+
+.container > div a:hover {
+    background: #B89B5E;
+    color: #1C2433;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(184,155,94,0.3);
+}
+
+/* Tabla */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -35,90 +53,108 @@ table {
 }
 
 thead th {
-    background: #667eea;
-    color: white;
-    padding: 10px;
+    background: #1C2433;
+    color: #D8C49A;
+    padding: 13px 16px;
     text-align: left;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
 }
 
+thead th:first-child { border-radius: 8px 0 0 0; }
+thead th:last-child  { border-radius: 0 8px 0 0; }
+
 tbody td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+    padding: 13px 16px;
+    border-bottom: 1px solid #E6E8EC;
+    font-size: 14px;
+    color: #2A2E34;
 }
 
 tbody tr:hover {
-    background-color: #f0f0f5;
+    background-color: #F4F6F8;
 }
 
-/* Links de acciones en tabla */
-a {
-    color: #764ba2;
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Stock */
+.stock-disponible {
+    color: #3F5247;
+    font-weight: 700;
+}
+
+.stock-agotado {
+    color: #c0392b;
+    font-weight: 700;
+}
+
+/* Botón editar */
+td a {
+    color: #3F5247;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 13px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid #3F5247;
+    transition: all 0.2s ease;
+    margin-right: 6px;
+    display: inline-block;
 }
 
-a:hover {
-    text-decoration: underline;
-}
-
-/* Formularios */
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-}
-
-.form-group label {
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.form-group input {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-}
-
-button {
-    padding: 12px;
-    background: #667eea;
+td a:hover {
+    background: #3F5247;
     color: white;
-    border: none;
+}
+
+/* Botón eliminar */
+.btn-eliminar {
+    background: transparent;
+    color: #c0392b;
+    border: 1px solid #c0392b;
+    padding: 6px 12px;
     border-radius: 6px;
     cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    transition: all 0.3s;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s ease;
 }
 
-button:hover {
-    background: #764ba2;
+.btn-eliminar:hover {
+    background: #c0392b;
+    color: white;
 }
 
-/* Mensajes de error */
-.error-message {
-    background-color: #ffdddd;
-    color: #d8000c;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 15px;
+/* Alertas */
+.alert {
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
 }
 
-/* Enlaces secundarios */
-a[href*="volver"] {
-    display: inline-block;
-    margin-top: 20px;
-    color: #667eea;
-    font-weight: bold;
+.alert-success {
+    background: #f0f9f4;
+    color: #27ae60;
+    border-left: 3px solid #27ae60;
 }
 
-a[href*="volver"]:hover {
-    text-decoration: underline;
+.alert-danger {
+    background: #fff5f5;
+    color: #c0392b;
+    border-left: 3px solid #c0392b;
+}
+
+/* Sin libros */
+p {
+    color: #7A828C;
+    text-align: center;
+    padding: 24px 0;
+    font-size: 15px;
 }

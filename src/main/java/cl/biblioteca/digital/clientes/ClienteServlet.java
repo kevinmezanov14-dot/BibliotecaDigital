@@ -1,55 +1,63 @@
 package cl.biblioteca.digital.clientes;
 
 import cl.biblioteca.digital.daos.ClienteDAO;
+import cl.biblioteca.digital.daos.ClienteDAOImpl;
 import cl.biblioteca.digital.dtos.ClienteDTO;
-import cl.biblioteca.digital.util.Conexion;
-
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.WebServlet;
-
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.List;
 
 @WebServlet("/clientes")
 public class ClienteServlet extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
+	private final ClienteDAO dao = new ClienteDAOImpl();
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		try {
+			List<ClienteDTO> lista = dao.listar();
+			request.setAttribute("clientes", lista);
+			request.getRequestDispatcher("/WEB-INF/jsp/clientes.jsp").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("error", "Error al cargar clientes. Intenta nuevamente.");
+			request.getRequestDispatcher("/WEB-INF/jsp/clientes.jsp").forward(request, response);
+		}
+	}
 
-        try (Connection conn = Conexion.getConexion()) {
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		try {
+			String nick = request.getParameter("nick");
+			String email = request.getParameter("email");
+			String fechaStr = request.getParameter("fechaNacimiento");
 
-            ClienteDAO dao = new ClienteDAO(conn);
-            List<ClienteDTO> lista = dao.listar();
+			if (nick == null || nick.isBlank() || email == null || email.isBlank()) {
+				request.setAttribute("error", "Nick y email son obligatorios.");
+				doGet(request, response);
+				return;
+			}
 
-            request.setAttribute("clientes", lista);
-            request.getRequestDispatcher("/WEB-INF/jsp/clientes.jsp")
-                   .forward(request, response);
+			ClienteDTO cliente = new ClienteDTO();
+			cliente.setNick(nick.trim());
+			cliente.setEmail(email.trim());
 
-        } catch (Exception e) {
-            throw new ServletException(e);
-        }
-    }
+			if (fechaStr != null && !fechaStr.isBlank()) {
+				cliente.setFechaNacimiento(java.sql.Date.valueOf(fechaStr));
+			}
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+			dao.registrar(cliente);
+			response.sendRedirect(request.getContextPath() + "/clientes");
 
-        try (Connection conn = Conexion.getConexion()) {
-
-            ClienteDAO dao = new ClienteDAO(conn);
-
-            ClienteDTO cliente = new ClienteDTO();
-            cliente.setNick(request.getParameter("nick"));
-            cliente.setEmail(request.getParameter("email"));
-
-            dao.registrar(cliente);
-
-            response.sendRedirect(request.getContextPath() + "/clientes");
-
-        } catch (Exception e) {
-            throw new ServletException(e);
-        }
-    }
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("error", "Error al registrar cliente. Intenta nuevamente.");
+			doGet(request, response);
+		}
+	}
 }

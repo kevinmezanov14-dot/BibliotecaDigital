@@ -33,7 +33,7 @@ public class LibroServlet extends HttpServlet {
 			request.getRequestDispatcher("/libros/listar.jsp").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
-			request.setAttribute("error", "Error al obtener libros: " + e.getMessage());
+			request.setAttribute("error", "Error al obtener los libros. Intenta nuevamente.");
 			request.getRequestDispatcher("/libros/listar.jsp").forward(request, response);
 		}
 	}

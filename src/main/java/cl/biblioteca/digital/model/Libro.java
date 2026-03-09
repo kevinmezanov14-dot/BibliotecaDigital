@@ -5,10 +5,9 @@ public class Libro {
 	private String titulo;
 	private String isbn;
 	private int anio;
-	private int autor_id;
+	private int autorId;
 	private int stock;
 
-	// Getters y setters
 	public int getId() {
 		return id;
 	}
@@ -41,12 +40,12 @@ public class Libro {
 		this.anio = anio;
 	}
 
-	public int getAutor_id() {
-		return autor_id;
+	public int getAutorId() {
+		return autorId;
 	}
 
-	public void setAutor_id(int autor_id) {
-		this.autor_id = autor_id;
+	public void setAutorId(int autorId) {
+		this.autorId = autorId;
 	}
 
 	public int getStock() {
