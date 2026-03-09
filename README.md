@@ -1,4 +1,4 @@
-# Biblioteca Digital UNTEC
+# Biblioteca Digital 
 
 Aplicación web dinámica desarrollada con Java EE para la gestión de libros, usuarios y préstamos de una biblioteca digital.
 
