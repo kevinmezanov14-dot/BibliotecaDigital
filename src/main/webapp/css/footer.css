@@ -1,0 +1,37 @@
+.site-footer {
+	background-color: #1C2433;
+	color: #B89B5E;
+	text-align: center;
+	padding: 16px 24px;
+	margin-top: auto;
+	border-top: 1px solid #B89B5E33;
+	font-family: 'DM Sans', sans-serif;
+	font-size: 13px;
+	letter-spacing: 0.04em;
+}
+
+.footer-content {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 12px;
+}
+
+.footer-brand {
+	font-family: 'Playfair Display', Georgia, serif;
+	font-weight: 600;
+	font-size: 14px;
+	color: #D8C49A;
+}
+
+.footer-brand i {
+	margin-right: 6px;
+}
+
+.footer-divider {
+	color: #B89B5E55;
+}
+
+.footer-text {
+	color: #7A828C;
+}
