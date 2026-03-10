@@ -1,10 +1,17 @@
+/* RESET SOLO PARA ESTA VISTA */
+.biblioteca-container * {
+    box-sizing: border-box;
+}
+
+/* Fondo de la página */
 body {
-    font-family: 'DM Sans', 'Segoe UI', sans-serif;
     background-color: #F4F6F8;
+    font-family: 'DM Sans', 'Segoe UI', sans-serif;
     color: #2A2E34;
 }
 
-.container {
+/* Contenedor principal */
+.biblioteca-container {
     max-width: 1100px;
     margin: 40px auto;
     padding: 32px;
@@ -14,7 +21,8 @@ body {
     border: 1px solid #E6E8EC;
 }
 
-h1, h2 {
+/* TITULO */
+.biblioteca-container h1 {
     font-family: 'Playfair Display', Georgia, serif;
     color: #1C2433;
     margin-bottom: 24px;
@@ -22,9 +30,9 @@ h1, h2 {
     font-weight: 600;
 }
 
-/* Botón agregar */
-.container > div[style*="margin-bottom"] a,
-.container > div a {
+/* BOTON AGREGAR */
+.biblioteca-container .btn-agregar,
+.biblioteca-container > div a {
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -38,21 +46,21 @@ h1, h2 {
     transition: all 0.25s ease;
 }
 
-.container > div a:hover {
+.biblioteca-container .btn-agregar:hover,
+.biblioteca-container > div a:hover {
     background: #B89B5E;
     color: #1C2433;
     transform: translateY(-1px);
-    box-shadow: 0 4px 15px rgba(184,155,94,0.3);
 }
 
-/* Tabla */
-table {
+/* TABLA */
+.biblioteca-container table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-thead th {
+.biblioteca-container thead th {
     background: #1C2433;
     color: #D8C49A;
     padding: 13px 16px;
@@ -63,25 +71,17 @@ thead th {
     text-transform: uppercase;
 }
 
-thead th:first-child { border-radius: 8px 0 0 0; }
-thead th:last-child  { border-radius: 0 8px 0 0; }
-
-tbody td {
+.biblioteca-container tbody td {
     padding: 13px 16px;
     border-bottom: 1px solid #E6E8EC;
     font-size: 14px;
-    color: #2A2E34;
 }
 
-tbody tr:hover {
+.biblioteca-container tbody tr:hover {
     background-color: #F4F6F8;
 }
 
-tbody tr:last-child td {
-    border-bottom: none;
-}
-
-/* Stock */
+/* STOCK */
 .stock-disponible {
     color: #3F5247;
     font-weight: 700;
@@ -92,8 +92,8 @@ tbody tr:last-child td {
     font-weight: 700;
 }
 
-/* Botón editar */
-td a {
+/* BOTON EDITAR */
+.biblioteca-container td a {
     color: #3F5247;
     text-decoration: none;
     font-weight: 600;
@@ -102,16 +102,14 @@ td a {
     border-radius: 6px;
     border: 1px solid #3F5247;
     transition: all 0.2s ease;
-    margin-right: 6px;
-    display: inline-block;
 }
 
-td a:hover {
+.biblioteca-container td a:hover {
     background: #3F5247;
     color: white;
 }
 
-/* Botón eliminar */
+/* BOTON ELIMINAR */
 .btn-eliminar {
     background: transparent;
     color: #c0392b;
@@ -121,8 +119,6 @@ td a:hover {
     cursor: pointer;
     font-size: 13px;
     font-weight: 600;
-    font-family: 'DM Sans', sans-serif;
-    transition: all 0.2s ease;
 }
 
 .btn-eliminar:hover {
@@ -130,31 +126,42 @@ td a:hover {
     color: white;
 }
 
-/* Alertas */
-.alert {
-    padding: 14px 18px;
-    margin-bottom: 20px;
+/* ALERTAS */
+.biblioteca-container .alert {
     border-radius: 8px;
     font-size: 14px;
-    font-weight: 500;
 }
 
-.alert-success {
+.biblioteca-container .alert-success {
     background: #f0f9f4;
     color: #27ae60;
-    border-left: 3px solid #27ae60;
 }
 
-.alert-danger {
+.biblioteca-container .alert-danger {
     background: #fff5f5;
     color: #c0392b;
-    border-left: 3px solid #c0392b;
 }
 
-/* Sin libros */
-p {
+/* SIN LIBROS */
+.biblioteca-container p {
     color: #7A828C;
     text-align: center;
     padding: 24px 0;
-    font-size: 15px;
+}
+.fila-vencida{
+    position: relative;
+    background: #fffafa;
+}
+
+.fila-vencida td:first-child{
+    border-left: 5px solid #c62828;
+    padding-left: 14px;
+}
+
+.dias-atraso{
+    font-size:0.75rem;
+    color:#c62828;
+    font-weight:600;
+    margin-top:4px;
+    letter-spacing:0.03em;
 }

@@ -84,19 +84,30 @@ public class PrestamoDAOImpl implements PrestamoDAO {
 
     @Override
     public boolean devolver(int prestamoId, int libroId) throws SQLException {
+
         String actualizarPrestamo = """
-            UPDATE prestamos SET fecha_devolucion = NOW(), estado = 'DEVUELTO'
+            UPDATE prestamos
+            SET fecha_devolucion = NOW(),
+                estado = 'DEVUELTO'
             WHERE id = ?
+            AND estado IN ('ACTIVO','VENCIDO')
         """;
+
         String aumentarStock = "UPDATE libros SET stock = stock + 1 WHERE id = ?";
 
         try (Connection conn = Conexion.getConexion()) {
             conn.setAutoCommit(false);
+
             try (PreparedStatement ps1 = conn.prepareStatement(actualizarPrestamo);
                  PreparedStatement ps2 = conn.prepareStatement(aumentarStock)) {
 
                 ps1.setInt(1, prestamoId);
-                ps1.executeUpdate();
+                int filas = ps1.executeUpdate();
+
+                if (filas == 0) {
+                    conn.rollback();
+                    return false;
+                }
 
                 ps2.setInt(1, libroId);
                 ps2.executeUpdate();

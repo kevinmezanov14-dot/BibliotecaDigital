@@ -1,9 +1,8 @@
 package cl.biblioteca.digital.servicios;
-
+import org.mindrot.jbcrypt.BCrypt;
 import cl.biblioteca.digital.daos.UsuarioDAO;
 import cl.biblioteca.digital.daos.UsuarioDAOImpl;
 import cl.biblioteca.digital.model.Usuario;
-import org.mindrot.jbcrypt.BCrypt;
 import java.sql.SQLException;
 
 public class UsuarioServicio {
