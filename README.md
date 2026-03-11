@@ -166,13 +166,13 @@ db.password=tu_password
 
 ## Funcionalidades
 
-| Módulo    | Funcionalidad                                                    |
-|           |                                                                  |
-| Usuarios  | Registro, login y logout con gestión de sesión                   |
-| Libros    | Listar, registrar, editar y eliminar libros                      |
-| Autores   | Registrar autores con nombre y nacionalidad                      |
-| Clientes  | Listar y registrar clientes                                      |
-| Préstamos | Registrar préstamos, devolver libros, control de stock y estados |
+| Módulo     | Funcionalidad |
+|------------|--------------|
+| Usuarios   | Registro, login y logout con gestión de sesión |
+| Libros     | Listar, registrar, editar y eliminar libros |
+| Autores    | Registrar autores con nombre y nacionalidad |
+| Clientes   | Listar y registrar clientes |
+| Préstamos  | Registrar préstamos, devolver libros, control de stock y estados |
 
 ---
 
@@ -188,7 +188,14 @@ db.password=tu_password
                                                   │   MySQL DB  │
                                                   └─────────────┘
 ```
+## Patrones de diseño utilizados
 
+- **MVC (Model View Controller)** — Separación entre la vista, la lógica de negocio y el acceso a datos.
+- **DAO (Data Access Object)** — Encapsula las operaciones de acceso a la base de datos.
+- **DTO (Data Transfer Object)** — Objetos utilizados para transportar datos entre capas.
+- **Service Layer** — Centraliza la lógica de negocio entre los Servlets y los DAOs.
+- **Singleton** — Implementado en la clase `Conexion` para gestionar una única instancia de conexión.
+  
 ### Capas del proyecto
 
 - **Vista** — JSPs con JSTL, Bootstrap 5 y CSS personalizado
@@ -222,3 +229,8 @@ db.password=tu_password
 ## Desarrollo
 
 Proyecto desarrollado como evaluación del **Módulo 5: Desarrollo de aplicaciones web dinámicas en Java** — Alkemy.
+
+## Autor
+
+Proyecto desarrollado por **Kevin Meza Catril**  
+Como parte del **Módulo 5: Desarrollo de aplicaciones web dinámicas en Java — Alkemy**.
