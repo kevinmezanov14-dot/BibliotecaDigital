@@ -1,5 +1,5 @@
 package cl.biblioteca.digital.dtos;
-
+//transporte datos LibroAutor DTO de Proyección
 public class LibroAutorDTO {
 
 	private int idLibro;

@@ -1,44 +1,81 @@
 package cl.biblioteca.digital.dtos;
 
+//transporte datos Libro DTO de Entidad
 public class LibroDTO {
 
-    private int id;
-    private String titulo;
-    private String isbn;
-    private int anio;
-    private int autorId;
-    private int stock;
-    private String autorNombre;
+	private int id;
+	private String titulo;
+	private String isbn;
+	private int anio;
+	private int autorId;
+	private int stock;
+	private String autorNombre;
 
-    public LibroDTO() {
-    }
+	public LibroDTO() {
+	}
 
-    public LibroDTO(String titulo, String isbn, int anio, int autorId, int stock) {
-        this.titulo = titulo;
-        this.isbn = isbn;
-        this.anio = anio;
-        this.autorId = autorId;
-        this.stock = stock;
-    }
+	public LibroDTO(String titulo, String isbn, int anio, int autorId, int stock) {
+		this.titulo = titulo;
+		this.isbn = isbn;
+		this.anio = anio;
+		this.autorId = autorId;
+		this.stock = stock;
+	}
 
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+	// Getters y Setters
+	public int getId() {
+		return id;
+	}
 
-    public String getTitulo() { return titulo; }
-    public void setTitulo(String titulo) { this.titulo = titulo; }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getIsbn() { return isbn; }
-    public void setIsbn(String isbn) { this.isbn = isbn; }
+	public String getTitulo() {
+		return titulo;
+	}
 
-    public int getAnio() { return anio; }
-    public void setAnio(int anio) { this.anio = anio; }
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
 
-    public int getAutorId() { return autorId; }
-    public void setAutorId(int autorId) { this.autorId = autorId; }
+	public String getIsbn() {
+		return isbn;
+	}
 
-    public int getStock() { return stock; }
-    public void setStock(int stock) { this.stock = stock; }
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
+	}
 
-    public String getAutorNombre() { return autorNombre; }
-    public void setAutorNombre(String autorNombre) { this.autorNombre = autorNombre; }
+	public int getAnio() {
+		return anio;
+	}
+
+	public void setAnio(int anio) {
+		this.anio = anio;
+	}
+
+	public int getAutorId() {
+		return autorId;
+	}
+
+	public void setAutorId(int autorId) {
+		this.autorId = autorId;
+	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
+
+	public String getAutorNombre() {
+		return autorNombre;
+	}
+
+	public void setAutorNombre(String autorNombre) {
+		this.autorNombre = autorNombre;
+	}
 }

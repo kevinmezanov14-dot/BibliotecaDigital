@@ -1,5 +1,5 @@
 package cl.biblioteca.digital.dtos;
-
+//transporte de datos del autor
 public class AutorDTO {
 	private int id;
 	private String nombre;

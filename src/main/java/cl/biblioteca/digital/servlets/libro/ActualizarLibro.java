@@ -17,9 +17,7 @@ public class ActualizarLibro extends HttpServlet {
     private LibroServicio  servicio      = new LibroServicio();
     private AutorServicio  autorServicio = new AutorServicio();
 
-    // =========================================================
-    // CARGAR FORMULARIO EDITAR (GET)
-    // =========================================================
+    // CARGAR FORMULARIO 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -49,15 +47,12 @@ public class ActualizarLibro extends HttpServlet {
             throw new ServletException("Error al cargar edición de libro", e);
         }
     }
-
-    // =========================================================
-    // PROCESAR ACTUALIZACIÓN (POST) — con validaciones completas
-    // =========================================================
+    // PROCESAR ACTUALIZACIÓN con validaciones
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            // ── Leer parámetros ───────────────────────────────────────
+            //  Leer parámetros
             String idStr    = request.getParameter("id");
             String titulo   = request.getParameter("titulo");
             String isbn     = request.getParameter("isbn");
@@ -65,7 +60,7 @@ public class ActualizarLibro extends HttpServlet {
             String stockStr = request.getParameter("stock");
             String autorStr = request.getParameter("autor_id");
 
-            // ── Validar campos obligatorios vacíos ────────────────────
+            //  Validar campos obligatorios vacíos 
             if (titulo == null || titulo.isBlank() ||
                 isbn   == null || isbn.isBlank()   ||
                 anioStr == null || anioStr.isBlank() ||
@@ -77,21 +72,14 @@ public class ActualizarLibro extends HttpServlet {
                 return;
             }
 
-            // ── Validar título (mínimo 2 caracteres) ──────────────────
-            if (titulo.trim().length() < 2) {
+            // Validar ISBN (10-50 dígitos, solo números y guiones)
+            if (!isbn.trim().matches("[\\d\\-]{10,50}")) {
                 recargarFormulario(request, response, idStr,
-                        "El título debe tener al menos 2 caracteres.");
+                        "ISBN inválido. Debe tener entre 10 y 50 caracteres (números y guiones).");
                 return;
             }
 
-            // ── Validar ISBN (10–17 dígitos, solo números y guiones) ──
-            if (!isbn.trim().matches("[\\d\\-]{10,17}")) {
-                recargarFormulario(request, response, idStr,
-                        "ISBN inválido. Debe tener entre 10 y 17 caracteres (números y guiones).");
-                return;
-            }
-
-            // ── Validar año ───────────────────────────────────────────
+            // Validar año
             int anioActual = Year.now().getValue();
             int anio;
             try {
@@ -106,7 +94,7 @@ public class ActualizarLibro extends HttpServlet {
                 return;
             }
 
-            // ── Validar stock (no negativo) ───────────────────────────
+            // Validar stock (no negativo)
             int stock;
             try {
                 stock = Integer.parseInt(stockStr.trim());
@@ -120,7 +108,7 @@ public class ActualizarLibro extends HttpServlet {
                 return;
             }
 
-            // ── Validar autor seleccionado ────────────────────────────
+            // Validar autor seleccionado
             int autorId;
             try {
                 autorId = Integer.parseInt(autorStr.trim());
@@ -129,7 +117,7 @@ public class ActualizarLibro extends HttpServlet {
                 return;
             }
 
-            // ── Todo válido → construir DTO y actualizar ──────────────
+            // Todo válido → construir DTO y actualizar
             LibroDTO dto = new LibroDTO();
             dto.setId(Integer.parseInt(idStr.trim()));
             dto.setTitulo(titulo.trim());
@@ -146,9 +134,7 @@ public class ActualizarLibro extends HttpServlet {
         }
     }
 
-    // =========================================================
     // MÉTODO AUXILIAR — recargar formulario con mensaje de error
-    // =========================================================
     private void recargarFormulario(HttpServletRequest request,
                                      HttpServletResponse response,
                                      String idStr,

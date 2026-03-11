@@ -12,12 +12,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+//Manejo de Solicitud listar de Libros 
 @WebServlet("/libros")
 public class LibroServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	private final LibroServicio libroServicio = new LibroServicio();
-
+	
+	// metodo se ejecuta cuando se hace petición de get
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

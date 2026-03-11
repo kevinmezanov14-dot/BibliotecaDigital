@@ -1,7 +1,7 @@
 package cl.biblioteca.digital.dtos;
 
 import java.sql.Date;
-
+//transporte datos Cliente
 public class ClienteDTO {
 
 	private int id;
@@ -9,7 +9,8 @@ public class ClienteDTO {
 	private String email;
 	private Date fechaNacimiento;
 	private boolean activo;
-
+	
+	// Getters y Setters
 	public int getId() {
 		return id;
 	}

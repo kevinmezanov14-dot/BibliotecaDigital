@@ -10,72 +10,86 @@ import java.util.Properties;
 
 public class Conexion {
 
-    // ── Singleton ──────────────────────────────────────────
-    private static Conexion instancia;
+	// Instancia única (Singleton)
+	private static Conexion instancia;
 
-    private static String URL;
-    private static String USER;
-    private static String PASSWORD;
+	private static String URL;
+	private static String USER;
+	private static String PASSWORD;
 
-    // Bloque estático: carga db.properties una sola vez
-    static {
-        try {
-            Properties props = new Properties();
-            InputStream input = Conexion.class
-                    .getClassLoader()
-                    .getResourceAsStream("db.properties");
-            if (input == null) {
-                throw new RuntimeException("No se encontró el archivo db.properties");
-            }
-            props.load(input);
-            URL      = props.getProperty("db.url");
-            USER     = props.getProperty("db.user");
-            PASSWORD = props.getProperty("db.password");
-        } catch (Exception e) {
-            throw new RuntimeException("Error cargando configuración de BD", e);
-        }
-    }
+	// Bloque estático: carga db.properties una sola vez
+	static {
+		try {
+			Properties props = new Properties();
+			InputStream input = Conexion.class.getClassLoader().getResourceAsStream("db.properties");
 
-    // Constructor privado: nadie puede hacer new Conexion()
-    private Conexion() {}
+			if (input == null) {
+				throw new RuntimeException("No se encontró el archivo db.properties");
+			}
 
-    // Punto de acceso único a la instancia
-    public static Conexion getInstancia() {
-        if (instancia == null) {
-            instancia = new Conexion();
-        }
-        return instancia;
-    }
-    // ── Fin Singleton ──────────────────────────────────────
+			props.load(input);
 
-    // Obtener conexión a la base de datos
-    public static Connection getConexion() throws SQLException {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            return DriverManager.getConnection(URL, USER, PASSWORD);
-        } catch (ClassNotFoundException e) {
-            throw new SQLException("Driver MySQL no encontrado", e);
-        }
-    }
+			URL = props.getProperty("db.url");
+			USER = props.getProperty("db.user");
+			PASSWORD = props.getProperty("db.password");
 
-    // Cerrar conexión
-    public static void cerrarConexion(Connection conn) {
-        if (conn != null) {
-            try { conn.close(); } catch (SQLException e) { e.printStackTrace(); }
-        }
-    }
+		} catch (Exception e) {
+			throw new RuntimeException("Error cargando configuración de BD", e);
+		}
+	}
 
-    // Cerrar Statement
-    public static void cerrarStatement(Statement stmt) {
-        if (stmt != null) {
-            try { stmt.close(); } catch (SQLException e) { e.printStackTrace(); }
-        }
-    }
+	// Constructor privado (parte clave del Singleton)
+	private Conexion() {
+	}
 
-    // Cerrar ResultSet
-    public static void cerrarResultSet(ResultSet rs) {
-        if (rs != null) {
-            try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }
-        }
-    }
+	// Método para obtener la única instancia
+	public static Conexion getInstancia() {
+		if (instancia == null) {
+			instancia = new Conexion();
+		}
+		return instancia;
+	}
+
+	// Obtener conexión a la base de datos
+	public Connection getConexion() throws SQLException {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			return DriverManager.getConnection(URL, USER, PASSWORD);
+		} catch (ClassNotFoundException e) {
+			throw new SQLException("Driver MySQL no encontrado", e);
+		}
+	}
+
+	// Cerrar conexión
+	public static void cerrarConexion(Connection conn) {
+		if (conn != null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	// Cerrar Statement
+	public static void cerrarStatement(Statement stmt) {
+		if (stmt != null) {
+			try {
+				stmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	// Cerrar ResultSet
+	public static void cerrarResultSet(ResultSet rs) {
+		if (rs != null) {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 }

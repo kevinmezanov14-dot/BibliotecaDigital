@@ -11,10 +11,11 @@ import cl.biblioteca.digital.util.Conexion;
 
 public class UsuarioDAOImpl implements UsuarioDAO {
 
+	// Obtener Usuario por nick y contraseña solo si está activo
 	@Override
 	public Usuario obtenerPorLogin(String nick, String password) throws SQLException {
 		String sql = "SELECT * FROM usuarios WHERE nick = ? AND password = ? AND activo = TRUE";
-		try (Connection conn = Conexion.getConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
+		try (Connection conn = Conexion.getInstancia().getConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setString(1, nick);
 			ps.setString(2, password);
 			try (ResultSet rs = ps.executeQuery()) {
@@ -24,11 +25,11 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 		return null;
 	}
-
+	// Buscar usuario por Nick
 	@Override
 	public Usuario obtenerPorNick(String nick) throws SQLException {
 		String sql = "SELECT * FROM usuarios WHERE nick = ?";
-		try (Connection conn = Conexion.getConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
+		try (Connection conn = Conexion.getInstancia().getConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setString(1, nick);
 			try (ResultSet rs = ps.executeQuery()) {
 				if (rs.next())
@@ -37,11 +38,11 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 		return null;
 	}
-
+	// Buscar usuario por Email
 	@Override
 	public Usuario obtenerPorEmail(String email) throws SQLException {
 		String sql = "SELECT * FROM usuarios WHERE email = ?";
-		try (Connection conn = Conexion.getConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
+		try (Connection conn = Conexion.getInstancia().getConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setString(1, email);
 			try (ResultSet rs = ps.executeQuery()) {
 				if (rs.next())
@@ -50,11 +51,11 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 		return null;
 	}
-
+	// Verificar si existe el Email
 	@Override
 	public boolean existeEmail(String email) throws SQLException {
 		String sql = "SELECT COUNT(*) FROM usuarios WHERE email = ?";
-		try (Connection conn = Conexion.getConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
+		try (Connection conn = Conexion.getInstancia().getConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setString(1, email);
 			try (ResultSet rs = ps.executeQuery()) {
 				if (rs.next())
@@ -63,12 +64,12 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 		return false;
 	}
-
+	// Obtener Lista de Usuarios
 	@Override
 	public List<Usuario> listarTodos() throws SQLException {
 		List<Usuario> usuarios = new ArrayList<>();
 		String sql = "SELECT * FROM usuarios ORDER BY nick";
-		try (Connection conn = Conexion.getConexion();
+		try (Connection conn = Conexion.getInstancia().getConexion();
 				PreparedStatement ps = conn.prepareStatement(sql);
 				ResultSet rs = ps.executeQuery()) {
 			while (rs.next()) {
@@ -77,13 +78,13 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 		return usuarios;
 	}
-
+	// Insertar nuevo Usuario
 	@Override
 	public int insertar(Usuario usuario) throws SQLException {
 		String sql = "INSERT INTO usuarios (nick, email, password, fecha_nacimiento, activo) "
 				+ "VALUES (?, ?, ?, ?, ?)";
-		try (Connection conn = Conexion.getConexion();
-				PreparedStatement ps = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+		try (Connection conn = Conexion.getInstancia().getConexion();
+				PreparedStatement ps = conn.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS)) { // permite obtener id de usuario recien creado
 			ps.setString(1, usuario.getNick());
 			ps.setString(2, usuario.getEmail());
 			ps.setString(3, usuario.getPassword());
@@ -100,11 +101,11 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 		}
 		return 0;
 	}
-
+	// Actualizar Usuario
 	@Override
 	public boolean actualizar(Usuario usuario) throws SQLException {
 		String sql = "UPDATE usuarios SET nick=?, email=?, password=?, " + "fecha_nacimiento=?, activo=? WHERE id=?";
-		try (Connection conn = Conexion.getConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
+		try (Connection conn = Conexion.getInstancia().getConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setString(1, usuario.getNick());
 			ps.setString(2, usuario.getEmail());
 			ps.setString(3, usuario.getPassword());
@@ -114,16 +115,16 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 			return ps.executeUpdate() > 0;
 		}
 	}
-
+	// Eliminar Usuario
 	@Override
 	public boolean eliminar(int id) throws SQLException {
 		String sql = "DELETE FROM usuarios WHERE id = ?";
-		try (Connection conn = Conexion.getConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
+		try (Connection conn = Conexion.getInstancia().getConexion(); PreparedStatement ps = conn.prepareStatement(sql)) {
 			ps.setInt(1, id);
 			return ps.executeUpdate() > 0;
 		}
 	}
-
+	// Convertir lista de usuario en un objeto UsuarioDTO así no se repite el bloque de codigo
 	private Usuario mapearUsuario(ResultSet rs) throws SQLException {
 		Usuario usuario = new Usuario();
 		usuario.setId(rs.getInt("id"));

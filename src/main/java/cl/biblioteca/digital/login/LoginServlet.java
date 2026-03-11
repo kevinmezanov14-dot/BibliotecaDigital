@@ -12,17 +12,20 @@ import java.time.Period;
 import cl.biblioteca.digital.model.Usuario;
 import cl.biblioteca.digital.servicios.UsuarioServicio;
 
+// Manejo de inicio de sesion
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private UsuarioServicio usuarioServicio = new UsuarioServicio();
 
+	// Muestra de formulario login
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.getRequestDispatcher("/login/login.jsp").forward(request, response);
 	}
 
+	// Procesar login cuando usuario envia el formulario
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -38,9 +41,9 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("nick", usuario.getNick());
 				session.setAttribute("usuarioId", usuario.getId());
 
-				// ✅ LÍNEAS NUEVAS — calcular y guardar edad
+				// Calcula edad del usuario
 				LocalDate fechaNac = usuario.getFechaNacimiento().toLocalDate();
-				int edad = Period.between(fechaNac, LocalDate.now()).getYears();
+				int edad = Period.between(fechaNac, LocalDate.now()).getYears(); // calculo de edad actual
 				session.setAttribute("edad", edad);
 
 				response.sendRedirect(request.getContextPath() + "/dashboard");

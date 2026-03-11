@@ -8,6 +8,7 @@ import java.util.List;
 
 public class PrestamoDAOImpl implements PrestamoDAO {
 
+	//Registrar nuevo prestamo
     @Override
     public boolean registrar(PrestamoDTO p) throws SQLException {
         String verificarStock  = "SELECT stock FROM libros WHERE id = ?";
@@ -17,7 +18,7 @@ public class PrestamoDAOImpl implements PrestamoDAO {
         """;
         String descontarStock = "UPDATE libros SET stock = stock - 1 WHERE id = ?";
 
-        try (Connection conn = Conexion.getConexion()) {
+        try (Connection conn = Conexion.getInstancia().getConexion()) {
             conn.setAutoCommit(false);
             try (PreparedStatement psStock  = conn.prepareStatement(verificarStock);
                  PreparedStatement psInsert = conn.prepareStatement(insertarPrestamo);
@@ -32,7 +33,7 @@ public class PrestamoDAOImpl implements PrestamoDAO {
                             return false;
                         }
                     } else {
-                        conn.rollback();
+                        conn.rollback(); // evita inconsistencia si 
                         return false;
                     }
                 }
@@ -47,7 +48,7 @@ public class PrestamoDAOImpl implements PrestamoDAO {
                 // Descontar stock
                 psUpdate.setInt(1, p.getLibroId());
                 psUpdate.executeUpdate();
-
+                // Confirmar transaccion
                 conn.commit();
                 return true;
 
@@ -59,7 +60,7 @@ public class PrestamoDAOImpl implements PrestamoDAO {
             }
         }
     }
-
+    // Obtener lista de préstamos
     @Override
     public List<PrestamoDTO> listar() throws SQLException {
         List<PrestamoDTO> lista = new ArrayList<>();
@@ -72,7 +73,7 @@ public class PrestamoDAOImpl implements PrestamoDAO {
             JOIN libros l ON p.libro_id = l.id
             ORDER BY p.fecha_solicitud DESC
         """;
-        try (Connection conn = Conexion.getConexion();
+        try (Connection conn = Conexion.getInstancia().getConexion();
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
@@ -81,7 +82,7 @@ public class PrestamoDAOImpl implements PrestamoDAO {
         }
         return lista;
     }
-
+    //Registrar devolución de libros
     @Override
     public boolean devolver(int prestamoId, int libroId) throws SQLException {
 
@@ -93,9 +94,9 @@ public class PrestamoDAOImpl implements PrestamoDAO {
             AND estado IN ('ACTIVO','VENCIDO')
         """;
 
-        String aumentarStock = "UPDATE libros SET stock = stock + 1 WHERE id = ?";
+        String aumentarStock = "UPDATE libros SET stock = stock + 1 WHERE id = ?"; 
 
-        try (Connection conn = Conexion.getConexion()) {
+        try (Connection conn = Conexion.getInstancia().getConexion()) {
             conn.setAutoCommit(false);
 
             try (PreparedStatement ps1 = conn.prepareStatement(actualizarPrestamo);
@@ -108,7 +109,7 @@ public class PrestamoDAOImpl implements PrestamoDAO {
                     conn.rollback();
                     return false;
                 }
-
+             // se agrega al stock el libro devuelto
                 ps2.setInt(1, libroId);
                 ps2.executeUpdate();
 
@@ -123,40 +124,40 @@ public class PrestamoDAOImpl implements PrestamoDAO {
             }
         }
     }
-
+    // Actualizar estado de un préstamo
     @Override
     public boolean actualizarEstado(int id, String estado) throws SQLException {
         String sql = "UPDATE prestamos SET estado = ? WHERE id = ?";
-        try (Connection conn = Conexion.getConexion();
+        try (Connection conn = Conexion.getInstancia().getConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, estado);
             ps.setInt(2, id);
             return ps.executeUpdate() > 0;
         }
     }
-
+    // Marcar los prestamos como vencidos automaticamente
     @Override
     public void actualizarPrestamosVencidos() throws SQLException {
         String sql = """
             UPDATE prestamos SET estado = 'VENCIDO'
             WHERE estado = 'ACTIVO' AND fecha_vencimiento < NOW()
         """;
-        try (Connection conn = Conexion.getConexion();
+        try (Connection conn = Conexion.getInstancia().getConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.executeUpdate();
         }
     }
-
+    // Eliminar un préstamo
     @Override
     public boolean eliminar(int id) throws SQLException {
         String sql = "DELETE FROM prestamos WHERE id = ?";
-        try (Connection conn = Conexion.getConexion();
+        try (Connection conn = Conexion.getInstancia().getConexion();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);
             return ps.executeUpdate() > 0;
         }
     }
-
+    // // Convertir lista de prestamo en un objeto prestamoDTO mapear así no se repite el bloque de codigo
     private PrestamoDTO mapear(ResultSet rs) throws SQLException {
         PrestamoDTO p = new PrestamoDTO();
         p.setId(rs.getInt("id"));
